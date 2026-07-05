@@ -30,6 +30,7 @@ GitHubは、そのGitリポジトリを共有するWebサービスです。
 | repository | ファイルと履歴を管理する場所 |
 | clone | リモートリポジトリを手元にコピーすること |
 | branch | 作業を分けるための線 |
+| stage | 次のcommitに入れる変更を置く場所 |
 | commit | 変更を履歴として保存すること |
 | push | 手元のcommitをGitHubへ送ること |
 | pull | GitHub側の変更を手元へ取り込むこと |
@@ -158,7 +159,34 @@ git diff --staged
 便利ですが、不要な一時ファイル、他の人のファイル、まだ確認していない変更まで入ることがあります。
 最初の練習では、`git add members/akr.html` のようにファイル名を指定し、「何をcommitするのか」を自分で確認します。
 
-## 5. commitする
+## 5. stage, commit, pushの違い
+
+Gitでは、編集したファイルをいきなりcommitするのではなく、まずstageに入れます。
+
+```text
+作業中のファイル
+  ↓ git add
+stage、つまりcommit予定
+  ↓ git commit
+手元の履歴
+  ↓ git push
+GitHub上のブランチ
+```
+
+それぞれの意味は次の通りです。
+
+| 操作 | 何をしているか |
+| --- | --- |
+| `git add members/akr.html` | 次のcommitに入れる変更を選ぶ |
+| `git diff --staged` | commit予定の変更を見る |
+| `git commit -m "..."` | 手元のリポジトリに履歴を作る |
+| `git push` | 手元のcommitをGitHubへ送る |
+
+commitは手元に履歴を作る操作です。
+commitしただけでは、まだGitHubには送られていません。
+GitHubに送るには、後で `git push` を実行します。
+
+## 6. commitする
 
 変更を履歴として保存します。
 
@@ -173,7 +201,7 @@ git log --oneline
 git status
 ```
 
-## 6. GitHubへpushする
+## 7. GitHubへpushする
 
 自分のブランチをGitHubへ送ります。
 
@@ -192,7 +220,7 @@ git push -u origin feature/update-akr
 `git push` は、作業ブランチをGitHubへ送る操作です。
 Pull Requestは、その後にGitHubの画面で「このブランチをmainへ取り込んでください」と依頼する操作です。
 
-## 7. Pull Requestを作る
+## 8. Pull Requestを作る
 
 push後、GitHubの画面を開くとPull Request作成ボタンが表示されます。
 
@@ -207,7 +235,7 @@ Add yamada profile
 - Gitのclone, branch, add, commit, pushを練習しました
 ```
 
-## 8. 取り込まれた後にmainを更新する
+## 9. 取り込まれた後にmainを更新する
 
 Pull Requestが取り込まれたら、自分の手元の `main` を最新にします。
 
