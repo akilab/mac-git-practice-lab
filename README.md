@@ -81,7 +81,7 @@ feature/add-your-name
 例:
 
 ```bash
-git switch -c feature/add-yamada
+git switch -c feature/update-akr
 ```
 
 確認します。
@@ -90,6 +90,24 @@ git switch -c feature/add-yamada
 git branch
 git status
 ```
+
+`git switch -c` は、新しいブランチを作成して、そのブランチへ切り替えるコマンドです。
+`feature/` は必須ではありません。
+次のようにしてもブランチは作れます。
+
+```bash
+git switch -c update-akr
+```
+
+ただし、`feature/update-akr` のように種類を付けておくと、後から見た時に「機能追加や作業用のブランチ」だと分かりやすくなります。
+
+昔から使われている `checkout` でも、同じようにブランチを作れます。
+
+```bash
+git checkout -b feature/update-akr
+```
+
+現在は、ブランチの切り替えには `git switch`、ファイルを戻す操作には `git restore` と、役割を分けて説明されることが増えています。
 
 ## 3. 自分のHTMLファイルを編集する
 
@@ -136,6 +154,10 @@ git add members/akr.html
 git diff --staged
 ```
 
+`git add .` は、今いるディレクトリ以下の変更をまとめてcommit対象に入れるコマンドです。
+便利ですが、不要な一時ファイル、他の人のファイル、まだ確認していない変更まで入ることがあります。
+最初の練習では、`git add members/akr.html` のようにファイル名を指定し、「何をcommitするのか」を自分で確認します。
+
 ## 5. commitする
 
 変更を履歴として保存します。
@@ -156,10 +178,19 @@ git status
 自分のブランチをGitHubへ送ります。
 
 ```bash
-git push -u origin feature/add-yamada
+git push -u origin feature/update-akr
 ```
 
-`-u` を付けると、次回から同じブランチでは `git push` だけで送れるようになります。
+`origin` は、clone元のGitHubリポジトリについた名前です。
+`git remote -v` で確認できます。
+
+`-u` は upstream を設定するオプションです。
+手元の `feature/update-akr` と、GitHub上の `feature/update-akr` を対応付けます。
+これにより、次回から同じブランチでは `git push` だけで送れるようになります。
+
+ここで行っているのは、Pull Requestではありません。
+`git push` は、作業ブランチをGitHubへ送る操作です。
+Pull Requestは、その後にGitHubの画面で「このブランチをmainへ取り込んでください」と依頼する操作です。
 
 ## 7. Pull Requestを作る
 
@@ -185,16 +216,26 @@ git switch main
 git pull
 ```
 
+`main` は共有される本線のブランチです。
+作業中は `feature/update-akr` にいますが、`main` が消えたわけではありません。
+作業が終わったら `git switch main` で本線へ戻れます。
+
+Pull Requestが取り込まれると、GitHub上の `main` が更新されます。
+`git pull` は、その更新を手元の `main` に持ってくるコマンドです。
+
 不要になった作業ブランチを消します。
 
 ```bash
-git branch -d feature/add-yamada
+git branch -d feature/update-akr
 ```
+
+`git branch -d` は、手元に残っている作業ブランチを削除します。
+Pull Requestが取り込まれた後なら、その作業ブランチの変更は `main` に入っているため、手元の作業ブランチは片付けて構いません。
 
 GitHub側のブランチも消したい場合:
 
 ```bash
-git push origin --delete feature/add-yamada
+git push origin --delete feature/update-akr
 ```
 
 ## よく使うコマンド早見表
@@ -230,7 +271,7 @@ GitLabを使う時も、基本の流れは同じです。
 ```bash
 git clone リポジトリURL
 git switch -c feature/作業名
-git add .
+git add 変更したファイル
 git commit -m "変更内容"
 git push -u origin feature/作業名
 ```
