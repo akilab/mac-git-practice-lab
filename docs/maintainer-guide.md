@@ -4,7 +4,7 @@
 
 ## 確認すること
 
-- `members/` の中に本人のファイルが追加されているか
+- `members/` の中にある本人のHTMLファイルだけが変更されているか
 - 他の人のファイルを誤って変更していないか
 - Pull Requestの説明が書かれているか
 - `git status`、`git add`、`git commit`、`git push` の流れを本人が説明できるか

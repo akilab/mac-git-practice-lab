@@ -37,17 +37,18 @@ GitHubは、そのGitリポジトリを共有するWebサービスです。
 
 ## 練習の全体像
 
-この練習では、各メンバーが自分の名前のブランチを作り、`members/` に自己紹介ファイルを追加します。
+この練習では、各メンバーが自分の名前のブランチを作り、`members/` にある自分用のHTMLファイルを編集します。
 
 例:
 
 ```text
-members/yamada.md
-members/sato.md
-members/tanaka.md
+members/akr.html
+members/rui.html
+members/ayu.html
+members/rie.html
 ```
 
-自分のファイルだけを追加・編集するので、コンフリクトが起きにくく、Gitの基本操作に集中できます。
+自分のファイルだけを編集するので、コンフリクトが起きにくく、Gitの基本操作に集中できます。
 
 ## 1. cloneする
 
@@ -90,26 +91,27 @@ git branch
 git status
 ```
 
-## 3. 自己紹介ファイルを作る
+## 3. 自分のHTMLファイルを編集する
 
-`members/` の中に、自分の名前のMarkdownファイルを作ります。
+`members/` の中に、自分のHTMLファイルがあります。
 
 例:
 
 ```bash
-cp templates/member-profile.md members/yamada.md
+open members/akr.html
 ```
 
-ファイルを開いて、内容を編集します。
+ファイル内の回答欄を編集します。
+他の人のファイルは編集しません。
 
 ```bash
-open members/yamada.md
+open members/akr.html
 ```
 
 Terminalだけで編集したい場合は、次のように中身を確認できます。
 
 ```bash
-cat members/yamada.md
+cat members/akr.html
 ```
 
 ## 4. 変更内容を確認する
@@ -130,7 +132,7 @@ git diff
 その場合は、ファイルを追加予定にしてから確認します。
 
 ```bash
-git add members/yamada.md
+git add members/akr.html
 git diff --staged
 ```
 
@@ -139,7 +141,7 @@ git diff --staged
 変更を履歴として保存します。
 
 ```bash
-git commit -m "Add yamada profile"
+git commit -m "Update akr profile"
 ```
 
 commitできたか確認します。
@@ -170,7 +172,7 @@ Pull Requestには、次のように書きます。
 Add yamada profile
 
 説明:
-- members/yamada.md を追加しました
+- members/akr.html の回答欄を更新しました
 - Gitのclone, branch, add, commit, pushを練習しました
 ```
 
